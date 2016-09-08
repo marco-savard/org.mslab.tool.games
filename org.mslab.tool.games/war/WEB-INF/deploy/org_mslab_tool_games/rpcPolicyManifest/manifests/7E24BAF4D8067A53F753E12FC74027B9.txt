@@ -1,0 +1,2 @@
+serviceClass: org.mslab.tool.games.client.GreetingService
+path: 993551203A2BDF8B84A7C0F3E04E7AF4.gwt.rpc
