@@ -11,6 +11,9 @@ public interface ImageBundle extends ClientBundle {
 
     @Source("images/animal_Panda_256px.png")
 	DataResource animal_Panda_256px();
+    
+    @Source("images/chess.jpg")
+	DataResource chess();
   
     @Source("images/flag_red.png")
 	DataResource flag_red();

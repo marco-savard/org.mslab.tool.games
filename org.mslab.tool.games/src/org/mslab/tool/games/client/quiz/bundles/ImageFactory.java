@@ -12,6 +12,7 @@ public class ImageFactory {
 
     public enum IMAGE {
 		ANIMAL__PANDA_256PX,
+		CHESS,
 		FLAG_RED,
 		GEOGRAPHY,
 		HISTORY,
@@ -43,6 +44,9 @@ public class ImageFactory {
 		
 		    case ANIMAL__PANDA_256PX:
 		        res = bundle.animal_Panda_256px();
+		        break;
+		    case CHESS:
+		        res = bundle.chess();
 		        break;
 		    case FLAG_RED:
 		        res = bundle.flag_red();

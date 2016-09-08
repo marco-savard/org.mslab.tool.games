@@ -4,14 +4,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.mslab.tool.games.client.ApplicationContext;
+import org.mslab.tool.games.client.ApplicationShell;
 import org.mslab.tool.games.client.core.ui.panels.GridPanel;
 import org.mslab.tool.games.client.quiz.abstracts.AbstractQuizPage;
 import org.mslab.tool.games.client.quiz.animal.AnimalQuizPage;
 import org.mslab.tool.games.client.quiz.flag.FlagQuizPage;
 import org.mslab.tool.games.client.quiz.geo.GeoQuizPage;
 import org.mslab.tool.games.client.quiz.history.HistoryQuizPage;
+import org.mslab.tool.games.client.quiz.ui.QuizButton;
 import org.mslab.tool.games.shared.text.MessageFormat;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Window;
@@ -21,12 +25,15 @@ import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Label;
 
-public class QuizShell extends GridPanel {
+public class QuizShell extends GridPanel implements ClickHandler {
+	private ApplicationShell _shell; 
 	private Map<AbstractQuizPage, Integer> _indexes = new HashMap<AbstractQuizPage, Integer>();
 	private QuizHome _home; 
 	private QuizShellContent _content;
+	private QuizButton _homeBtn;
 	
-	public QuizShell() {
+	public QuizShell(ApplicationShell shell) {
+		_shell = shell;
 		_grid.setSize("100%", "100%");
 		int row = 0;
 		
@@ -40,8 +47,14 @@ public class QuizShell extends GridPanel {
 		
 		_content = new QuizShellContent(this); 
 		_grid.setWidget(row, 0, _content);
+		row++;
+		
+		_homeBtn = new QuizButton("Accueil");
+		_homeBtn.addClickHandler(this); 
+		_grid.setWidget(row, 0, _homeBtn);
 		_grid.getFlexCellFormatter().setHeight(row, 0, "95%");
 		_grid.getFlexCellFormatter().setVerticalAlignment(row, 0, HasVerticalAlignment.ALIGN_TOP);
+		_grid.getFlexCellFormatter().setHorizontalAlignment(row, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		row++;
 	}
 
@@ -53,6 +66,11 @@ public class QuizShell extends GridPanel {
 	public void goHome() {
 		_home.refresh(); 
 		_content.showWidget(0);
+	}
+	
+	@Override
+	public void onClick(ClickEvent event) {
+		_shell.showHome();
 	}
 	
 	private class QuizShellContent extends DeckPanel {
@@ -122,5 +140,7 @@ public class QuizShell extends GridPanel {
 			_statusLbl.setHTML(status);
 		}
 	}
+
+
 
 }

@@ -34,7 +34,8 @@ public class Org_mslab_tool_games implements EntryPoint {
 	
 	private void init(ApplicationContext ctx) {
 		//Load the application (can be long)
-		QuizShell shell = new QuizShell();
+		ApplicationShell shell = new ApplicationShell();
+		//QuizShell shell = new QuizShell();
 		//GameShell shell = new GameShell();
 		_root.add(shell);
 		
