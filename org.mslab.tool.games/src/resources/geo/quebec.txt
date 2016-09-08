@@ -1,0 +1,45 @@
+﻿Que-bec:46.49'N 71.13'W
+Montre-al:45.30'N 73.34'W
+Sherbrooke:45.24'N 71.54'W
+Saguenay:48.25'N 71.04'W
+Trois--Rivie-0res:46.21'N 72.33'W
+Saint--Jean--sur--Richelieu:45.19'N 73.16'W
+Drummondville:45.53'N 72.29'W
+Granby:45.24'N 72.44'W
+Saint--Hyacinthe:45.37'N 72.57'W
+Shawinigan:46.34'N 72.45'W
+Rimouski:48.27'N 68.32'W
+Sorel--Tracy:46.02'N 73.07'W
+Joliette:46.01'N 73.27'W
+Victoriaville:46.03'N 71.58'W
+Rouyn--Noranda:48.14'N 79.01'W
+Salaberry--de--Valleyfield:45.15'N 74.08'W
+Saint--Georges:46.07'N 70.40'W
+Val--d'Or:48.06'N 77.47'W
+Alma:48.33'N 71.39'W
+Baie--Comeau:49.13'N 68.09'W
+Sept--Iles:50.13'N 66.23'W
+Thetford Mines:46.06'N 71.18'W
+Rivie-0re--du--Loup:47.50'N 69.32'W
+Matane:48.51'N 67.32'W
+Amos:48.34'N 78.07'W
+Dolbeau--Mistassini:48.53'N 72.14'W
+La Tuque:47.26'N 72.47'W
+Lachute:45.39'N 74.20'W
+Cowansville:45.12'N 72.45'W
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,19 @@
+1543:Copernic de-couvre que la Terre tourne autour du Soleil
+1590:Galile-e de-crit la loi de la chute des corps
+1610:Galile-e de-couvre quatre satellites de Jupiter
+1619:Kepler de-crit les lois qui explique le mouvement des plane-0tes
+1656:Huygens de-couvre les anneaux de Saturne
+1675:Ro-3mer mesure la vitesse de la lumie-0re
+1687:Newton e-nonce la loi universelle de la gravitation
+1705:Halley calcule la pe-riode de re-volution de la come-0te qui portera son nom
+1781:Herschel de-couvre la plane-0te Uranus
+1801:Piazzi de-couvre Ce-res, le permier aste-roide
+1846:Galle de-couvre la plane-0te Neptune
+1905:Einstein publie la the-orie de la relativite- restreinte
+1915:Einstein publie la the-orie de la relativite- ge-ne-rale
+1927:Lemai-1tre de-crit un univers en expansion, de-coulant du Big Bang
+1930:Tombaugh de-couvre la plane-0te naine Pluton
+1958:Van Allen de-couvre les ceintures de radiation autour de la Terre
+1963:Matthews et Sandage de-couvrent les quasars
+1967:Bell et Hewish de-couvrent les pulsars
+1995:De-couverte d'une exoplane-0te, une plane-0te en orbite autour d'une e-toile

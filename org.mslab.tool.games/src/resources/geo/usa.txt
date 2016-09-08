@@ -1,0 +1,38 @@
+﻿Anchorage:61.13'N 149.54'W
+Seattle:47.37'N 122.20'W
+Portland (Oregon):45.31'N 122.41'W
+Minneapolis:44.59'N 93.16'W
+Montpelier:44.15'N 72.34'W
+Buffalo:42.54'N 48.51'W
+Boston:42.21'N 71.04'W
+De-troit:42.20'N 83.03'W
+Chicago:41.53'N 87.38'W
+Salt Lake City:40.45'N 111.53'W
+New York City:40.40'N 73.56'W
+Pittsburgh:40.29'N 80.00'W
+Philadelphie:40.57'N 75.10'W
+Denver:39.44'N 104.59'W
+Baltimore:39.17'N 76.37'W
+Cincinnati:39.06'N 84.31'W
+Kansas City:39.06'N 94.35'W
+Washington:38.54'N 77.02'W
+Saint--Louis:38.38'N 90.12'W
+Sacremento:38.33'N 121.28'W
+San Francisco:37.47'N 122.25'W
+Las Vegas:36.11'N 115.08'W
+Nashville:36.10'N 86.47'W
+Oklahoma City:35.29'N 97.32'W
+Memphis:35.07'N 89.58'W
+Los Angeles:34.03'N 118.15'W
+Phoenix:33.27'N 112.04'W
+San Diego:32.43'N 117.10'W
+Tucson:32.13'N 110.56'W
+Jacksonville (Floride):32.20'N 81.40'W
+Austin (Texas):30.15'N 97.45'W
+Nouvelle--Orle-ans:29.58'N 90.03'W
+Houston:29.46'N 95.23'W
+Orlando:28.25'N 81.18'W
+Tamba Bay:27.57'N 82.28'W
+Miami:25.47'N 80.13'W
+Key West:24.34'N 81.47'W
+Honolulu:21.19'N 157.50'W

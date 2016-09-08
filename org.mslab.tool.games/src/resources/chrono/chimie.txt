@@ -1,0 +1,17 @@
+1662:Boyle e-nonce la loi sur la compressibilite- des gaz
+1669:Brand de-couvre le phosphore
+1755:Davy de-couvre le magne-sium
+1766:Cavendish de-couvre l'hydroge-0ne
+1772:Rutherford de-couvre l'azote
+1774:Scheele et Priestly de-couvrent l'oxyge-0ne
+1789:Lavoisier de-crit la composition de l'air et de l'eau
+1803:Dalton de-crit la the-orie atomique
+1811:Avogadro de-crit les mole-cules
+1868:Ransey de-couvre l'he-lium
+1869:Mendeleiev pre-sente une classification pe-riodique des e-le-ments
+1896:Becquerel de-couvre la radioactivite- 
+1897:Thomson de-couvre l'e-lectron
+1898:Pierre et Marie Curie de-couvrent le radium
+1900:Planck e-nonce la the-orie des quanta
+1919:Rutherfrod de-couvre le proton
+1932:Chadwick de-couvre le neutron

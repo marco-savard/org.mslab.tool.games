@@ -1,0 +1,78 @@
+1665:Newton et Leibniz de-veloppent le calcul diffe-rentiel
+1675:Papin invente la marmite a- vapeur
+1712:Newcomen invente la machine a- vapeur
+1714:Farenheit invente le thermome-tre a- mercure
+1752:Franklin invente le paratonnerre
+1764:Hargreaves invente le me-tier a- filer
+1765:James Watt invente le condensateur de vapeur
+1768:Baume- invente l'ae-rome-0tre
+1783:Lenormand invente le parachute
+1793:Whitney invente l'e-greneuse de coton
+1800:Volta invente la batterie e-lectrique
+1804:Trevithick invente la locomotive a- vapeur
+1817:Brewster invente le kalae-idoscope
+1822:Niepce invente l'appareil photo
+1823:Babbage invente la machine a- calculer
+1826:Niepce invente la photographie
+1827:Walker invente l'allumette
+1831:Faraday invente le dynamo
+1834:McComick invente la moissonneuse
+1836:Morse invente le te-le-graphe
+1837:Colt invente le revolver
+1846:Howe invente la machine a- coudre
+1852:Foucault invente le gyroscope
+1853:Otis invente l'ascenseur
+1856:Carre- invente le re-frige-rateur
+1858:Smith invente la machine a- laver
+1859:Lenoir invente le moteur a- explosion
+1866:Nobel invente la dynamite
+1868:Hills invente la tondeuse a- gazon
+1870:Me-0ge--Mourie-0s invente la margarine
+1876:Graham Bell invente le te-le-phone
+1877:Edison invente le phonographe
+1878:Hughes invente le microphone
+1879:Edison invente la lampe a- incandescence
+1884:Waterman invente le stylo a- encre
+1885:Daimler invente la motocyclette
+1887:Berliner invente le gramophone
+1888:Dunlop invente le pneumatique
+1895:Marconi invente le TSF (radio)
+1895:Gillette invente le rasoir a- lame interchangeable
+1897:Diesel invente le moteur a-ponyme
+1898:Holland invente le sous--marin
+1899:Poulsen invente le magne-tophone
+1901:Booth invente l'aspirateur
+1903:Les fre-0res Wright construisent le premier avion
+1904:Fleming invente la diode
+1908:Brandengerger invente le cellophane
+1911:Holt invente la moisonneuse-batteuse
+1915:Langmuir invente la lampe a- filament de tungste-0ne
+1918:Browning invente le fusil automatique
+1926:Goddard construit une fusée a- propergol liquide
+1928:Schnick met au point le rasoir e-lectrique
+1933:Armstrong invente la radio par modulation de fre-quence
+1934:Joliot et Curie inventent la radioactivite- artificielle
+1935:Watson--Watt invente le radar
+1936:Focke invente l'he-licopte-0re a- rotors jumele-s
+1942:Fermi met au point la pile atomique
+1944:Von Braun conc-oit le missile V2
+1945:Les Ame-ricains construisent la bombe atomique
+1946:Eckert et Mauchly construisent le premier ordinateur
+1947:Spencer invente le four a- micro--ondes
+1948:Bardeen, Brattain et Schickley inventent le transistor
+1952:Les Ame-ricains construisent la bombe a- hydroge-0ne
+1953:Compton et Dewey de-couvrent la structure en double he-lice de l'ADN
+1955:Libby de-couvre la datation par le carbone 14
+1957:Les Sovie-tiques mettent en orbite le satellite Spoutnik
+1959:Kilby et Noyce conc-oivent le circuit inte-gre-
+1960:Pincus et Rock inventent la pilule contraceptive
+1962:Holonyak invente le diode e-lectroluminescente (DEL)
+1966:DeBakey invente le coeur artificiel
+1967:Le Sud Africain Barnard re-ussit la premie-0re greffe de coeur
+1971:Hoff conc-oit le premier microprocesseur
+1972:Kilby et Merryman construisent la premie-0re calculatrice de poche
+1974:Le Franc-ais Moreno invente la carte a- puce
+1975:Le Franc-ais Maupas invente le vaccin contre l'he-patite B
+1978:Syhthe-0se des ge-0nes de l'insuline
+1979:Sinjou et Doi inventent le disque compact
+1981:La NASA construit la navette spatiale

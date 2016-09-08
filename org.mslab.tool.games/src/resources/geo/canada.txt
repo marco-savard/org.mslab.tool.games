@@ -1,0 +1,27 @@
+﻿Que-bec:46.49'N 71.13'W
+Montre-al:45.30'N 73.34'W
+Toronto:43.42'N 79.24'W
+Vancouver:49.15'N 123.6'W
+Calgary:51.03'N 114.04'W
+Edmonton:53.32'N 113.30'W
+Ottawa:45.25'15″N 75.41'24″W
+Winnipeg:49.53'58″N 97.08'21″W
+Hamilton:43.15'N 79.52'W
+Kitchener:43.27'N 80.29'W
+Waterloo:43.28'N 80.31'W
+London:42.9837.N 81.2497.W
+St Catharines:43.11'N 79.14'W
+Halifax:44.51'16″N 63.11'57″W
+Victoria:48.25'43″N 123.21'56″W
+Windsor:42.17'N 83.00'W
+Saskatoon:52.08'N 106.41'W
+Regina:50.27'17″N 104.36'24″W
+
+
+
+
+
+
+
+
+
