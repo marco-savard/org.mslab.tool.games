@@ -143,8 +143,7 @@ public class ApplicationHome extends GridPanel {
 		
 		@Override
 		public void onClick(ClickEvent event) {
-			// TODO Auto-generated method stub
-			
+			_owner.showStrategy();
 		}
 	}
 	
