@@ -1,7 +1,8 @@
 package org.mslab.tool.games.client.strategy.queens;
 
 import org.mslab.tool.games.client.core.ui.panels.GridPanel;
-import org.mslab.tool.games.client.strategy.GameButton;
+import org.mslab.tool.games.client.game.ui.GameButton;
+import org.mslab.tool.games.client.strategy.GameButtonOld;
 import org.mslab.tool.games.shared.text.MessageFormat;
 
 import com.google.gwt.dom.client.Style.Unit;
@@ -19,21 +20,17 @@ public class QueensLeftMenu extends GridPanel implements ClickHandler {
 		_grid.setCellSpacing(18);
 		int row = 0;
 		
-		_resetBtn = new GameButton(); 
-		String html = "<i class=\"fa fa-repeat\"></i> Recommencer"; 
-		_resetBtn.setHTML(html);
+		_resetBtn = new GameButton("<i class=\"fa fa-repeat\"></i>", "Recommencer"); 
 		_grid.setWidget(row, 0, _resetBtn);
 		_resetBtn.addClickHandler(this); 
 		row++; 
 		
-		_previousBtn = new GameButton(); 
+		_previousBtn = new GameButton("", "Pr&eacute;c&eacute;dent"); 
 		_grid.setWidget(row, 0, _previousBtn);
 		_previousBtn.addClickHandler(this); 
 		row++;
 		
-		_homeBtn = new GameButton(); 
-		 html = "<i class=\"fa fa-home\"></i> Strat&eacute;gie"; 
-		 _homeBtn.setHTML(html);
+		_homeBtn = new GameButton("<i class=\"fa fa-home\"></i>", "Strat&eacute;gie"); 
 		_grid.setWidget(row, 0, _homeBtn);
 		_homeBtn.addClickHandler(this); 
 		

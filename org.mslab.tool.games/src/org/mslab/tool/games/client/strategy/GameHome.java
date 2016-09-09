@@ -3,6 +3,7 @@ package org.mslab.tool.games.client.strategy;
 import org.mslab.tool.games.client.core.ui.StyleUtil;
 import org.mslab.tool.games.client.core.ui.panels.GridPanel;
 import org.mslab.tool.games.client.core.ui.theme.AbstractTheme;
+import org.mslab.tool.games.client.game.ui.GameButton;
 import org.mslab.tool.games.client.strategy.peg.PegGameTheme;
 import org.mslab.tool.games.client.strategy.queens.QueensTheme;
 import org.mslab.tool.games.shared.text.MessageFormat;
@@ -29,11 +30,18 @@ public class GameHome extends GridPanel implements ClickHandler {
 	
 	public GameHome(GameShell owner) {
 		_owner = owner; 
-		AbstractTheme.setTheme(new PegGameTheme());
-		_grid.setCellSpacing(24);
 		int row = 0, col = 0;
 		
+		_home = new GameButton("<i class=\"fa fa-home\" aria-hidden=\"true\"></i>","Accueil");
+		_home.getElement().getStyle().setMargin(12, Unit.PX);
+		_home.addClickHandler(this);
+		_grid.setWidget(row, 0, _home);
+		_grid.getFlexCellFormatter().setColSpan(row, 0, 4);
+		_grid.getFlexCellFormatter().setHorizontalAlignment(row, 1, HasHorizontalAlignment.ALIGN_LEFT);
+		row++;
+		
 		Title title = new Title(); 
+		title.getElement().getStyle().setMarginBottom(12, Unit.PX);
 		_grid.setWidget(row, 1, title); 
 		_grid.getFlexCellFormatter().setHorizontalAlignment(row, 1, HasHorizontalAlignment.ALIGN_CENTER);
 		_grid.getFlexCellFormatter().setColSpan(row, 1, 2);
@@ -46,12 +54,14 @@ public class GameHome extends GridPanel implements ClickHandler {
 		
 		Widget icon = new SolitaireIcon(); 
 		_solitaire = new GameTile(icon, "Solitaire"); 
+		_solitaire.getElement().getStyle().setMargin(12, Unit.PX);
 		_solitaire.addClickHandler(this);
 		_grid.setWidget(row, col, _solitaire);
 		col++;
 		
 	     icon = new HTML("&#9813;");
 		_queens = new GameTile(icon, "8 reines"); 
+		_queens.getElement().getStyle().setMargin(12, Unit.PX);
 		_queens.addClickHandler(this);
 		_grid.setWidget(row, col, _queens);
 		col++;
@@ -61,12 +71,9 @@ public class GameHome extends GridPanel implements ClickHandler {
 		_grid.getFlexCellFormatter().setWidth(row, col, "45%");
 		row++;
 		
-		_home = new GameButton();
-		_home.setText("Accueil");
-		_home.addClickHandler(this);
-		_grid.setWidget(row, 1, _home);
-		_grid.getFlexCellFormatter().setColSpan(row, 1, 2);
-		_grid.getFlexCellFormatter().setHorizontalAlignment(row, 1, HasHorizontalAlignment.ALIGN_CENTER);
+		SimplePanel filler = new SimplePanel(); 
+		_grid.setWidget(row, 0, filler);
+		_grid.getFlexCellFormatter().setHeight(row, 0, "95%");
 	}
 	
 	@Override

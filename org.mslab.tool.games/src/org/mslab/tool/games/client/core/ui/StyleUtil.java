@@ -3,6 +3,7 @@ package org.mslab.tool.games.client.core.ui;
 import org.mslab.tool.games.shared.text.MessageFormat;
 import org.mslab.tool.games.shared.types.Color;
 
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -88,7 +89,11 @@ public class StyleUtil {
 	}
 	
 	public static void setLinearGradient(Widget widget, String value) {
-		Style style = widget.getElement().getStyle();
+		setLinearGradient(widget.getElement(), value); 
+	}
+	
+	public static void setLinearGradient(Element element, String value) {
+		Style style = element.getStyle();
 		
 		for (String browser : BROWSERS) {
 			String image =  MessageFormat.format(LINEAR_GRADIENT, new Object[] {browser, value}); 

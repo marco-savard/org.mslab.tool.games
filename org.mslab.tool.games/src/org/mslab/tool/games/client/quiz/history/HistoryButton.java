@@ -1,16 +1,13 @@
 package org.mslab.tool.games.client.quiz.history;
 
-import org.mslab.tool.games.client.quiz.ui.QuizButton;
-
-import com.google.gwt.dom.client.Style;
-import com.google.gwt.dom.client.Style.Unit;
+import org.mslab.tool.games.client.game.ui.GameButton;
 import com.google.gwt.dom.client.Style.WhiteSpace;
 
-public class HistoryButton extends QuizButton {
+public class HistoryButton extends GameButton {
 	private HistoryEvent _historyEvent; 
 
 	public HistoryButton(String label) {
-		super(label);
+		super("", label);
 		getElement().getStyle().setWhiteSpace(WhiteSpace.NORMAL);
 	}
 	

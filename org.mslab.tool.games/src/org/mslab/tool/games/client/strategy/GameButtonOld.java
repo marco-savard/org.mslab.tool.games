@@ -9,9 +9,9 @@ import org.mslab.tool.games.shared.types.Color;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.dom.client.Style.BorderStyle;
 
-public class GameButton extends ThematicButton {
+public class GameButtonOld extends ThematicButton {
 	
-	public GameButton() {
+	private GameButtonOld() {
 		Color borderColor = PegGameTheme.FG_COLOR.blendWith(PegGameTheme.BG_COLOR); 
 		
 		Style style = getElement().getStyle();

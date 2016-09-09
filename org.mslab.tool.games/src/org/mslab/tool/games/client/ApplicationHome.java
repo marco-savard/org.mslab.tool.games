@@ -42,7 +42,7 @@ public class ApplicationHome extends GridPanel {
 			_grid.setSize("100%", "100%");
 			int row = 0;
 			
-			HTML title = new HTML("Choisissez une cat&eacute;gorie"); 
+			HTML title = new HTML("<i class=\"fa fa-home fa-2x\" aria-hidden=\"true\"></i> Accueil"); 
 			title.getElement().getStyle().setFontSize(200, Unit.PCT);
 			title.getElement().getStyle().setMarginBottom(50, Unit.PX);
 			_grid.setWidget(row, 0, title); 

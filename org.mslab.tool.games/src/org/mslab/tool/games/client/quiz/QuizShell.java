@@ -6,6 +6,7 @@ import java.util.Map;
 import org.mslab.tool.games.client.ApplicationContext;
 import org.mslab.tool.games.client.ApplicationShell;
 import org.mslab.tool.games.client.core.ui.panels.GridPanel;
+import org.mslab.tool.games.client.game.ui.GameButton;
 import org.mslab.tool.games.client.quiz.abstracts.AbstractQuizPage;
 import org.mslab.tool.games.client.quiz.animal.AnimalQuizPage;
 import org.mslab.tool.games.client.quiz.flag.FlagQuizPage;
@@ -14,6 +15,7 @@ import org.mslab.tool.games.client.quiz.history.HistoryQuizPage;
 import org.mslab.tool.games.client.quiz.ui.QuizButton;
 import org.mslab.tool.games.shared.text.MessageFormat;
 
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ResizeEvent;
@@ -30,7 +32,7 @@ public class QuizShell extends GridPanel implements ClickHandler {
 	private Map<AbstractQuizPage, Integer> _indexes = new HashMap<AbstractQuizPage, Integer>();
 	private QuizHome _home; 
 	private QuizShellContent _content;
-	private QuizButton _homeBtn;
+	private GameButton _homeBtn;
 	
 	public QuizShell(ApplicationShell shell) {
 		_shell = shell;
@@ -45,17 +47,20 @@ public class QuizShell extends GridPanel implements ClickHandler {
 			row++;
 		}
 		
-		_content = new QuizShellContent(this); 
-		_grid.setWidget(row, 0, _content);
-		row++;
-		
-		_homeBtn = new QuizButton("Accueil");
+		_homeBtn = new GameButton("<i class=\"fa fa-home\" aria-hidden=\"true\"></i>", "Accueil");
+		_homeBtn.getElement().getStyle().setMargin(12, Unit.PX);
 		_homeBtn.addClickHandler(this); 
 		_grid.setWidget(row, 0, _homeBtn);
+		_grid.getFlexCellFormatter().setHorizontalAlignment(row, 0, HasHorizontalAlignment.ALIGN_LEFT);
+		row++;
+		
+		_content = new QuizShellContent(this); 
+		_grid.setWidget(row, 0, _content);
 		_grid.getFlexCellFormatter().setHeight(row, 0, "95%");
 		_grid.getFlexCellFormatter().setVerticalAlignment(row, 0, HasVerticalAlignment.ALIGN_TOP);
 		_grid.getFlexCellFormatter().setHorizontalAlignment(row, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		row++;
+		
 	}
 
 	public void display(AbstractQuizPage category) {

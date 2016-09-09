@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.mslab.tool.games.client.core.ui.panels.GridPanel;
+import org.mslab.tool.games.client.game.ui.GameButton;
 import org.mslab.tool.games.client.quiz.QuizShell;
 import org.mslab.tool.games.client.quiz.bundles.ImageFactory;
 import org.mslab.tool.games.client.quiz.ui.QuizButton;
@@ -23,7 +24,7 @@ import com.google.gwt.user.client.ui.Image;
 
 public abstract class AbstractQuizPage extends GridPanel {
 	protected QuizShell _shell; 
-	protected QuizButton _homeButton, _playAgainBtn;
+	protected GameButton _homeButton, _playAgainBtn;
 	protected List<Boolean> _rightAnswers = new ArrayList<Boolean>();
 	protected List<Boolean> _totalAnswers = new ArrayList<Boolean>();
 	
@@ -49,12 +50,12 @@ public abstract class AbstractQuizPage extends GridPanel {
     	public ButtonPanel() {
     		int col = 0;
     		
-    		_homeButton = new QuizButton("Retour page principale");
+    		_homeButton = new GameButton("<i class=\"fa fa-arrow-circle-left\" aria-hidden=\"true\"></i>", "Retour page principale");
     		_homeButton.addClickHandler(this); 
     		_grid.setWidget(0, col, _homeButton);
     		col++;
     		
-    		_playAgainBtn = new QuizButton("Jouer encore"); 
+    		_playAgainBtn = new GameButton("<i class=\"fa fa-repeat\" aria-hidden=\"true\"></i>", "Jouer encore"); 
     		_playAgainBtn.addClickHandler(this); 
     		_grid.setWidget(0, col, _playAgainBtn);
     		refresh();

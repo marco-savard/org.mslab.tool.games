@@ -3,7 +3,8 @@ package org.mslab.tool.games.client.strategy.peg;
 import org.mslab.tool.games.client.core.ui.panels.CommonDisclosurePanel;
 import org.mslab.tool.games.client.core.ui.panels.ResizeGridPanel;
 import org.mslab.tool.games.client.core.ui.theme.AbstractTheme;
-import org.mslab.tool.games.client.strategy.GameButton;
+import org.mslab.tool.games.client.game.ui.GameButton;
+import org.mslab.tool.games.client.strategy.GameButtonOld;
 import org.mslab.tool.games.client.strategy.GameShell;
 
 import com.google.gwt.dom.client.Style.Unit;
@@ -59,16 +60,12 @@ public class PegGameShell extends ScrollPanel {
 			_score = new PegGameScore(); 
 			_rightMargin = new SimplePanel(); 
 
-			_startBtn = new GameButton();
-			String html = "<i class=\"fa fa-repeat\"></i> Recommencer"; 
-			_startBtn.setHTML(html);
+			_startBtn = new GameButton("<i class=\"fa fa-repeat\"></i>", "Recommencer");
 			_startBtn.getElement().getStyle().setMarginRight(24, Unit.PX);
 			_startBtn.getElement().getStyle().setMarginTop(24, Unit.PX);
 			_startBtn.addClickHandler(this); 
 			
-			_homeBtn = new GameButton();
-			 html = "<i class=\"fa fa-home\"></i> Strat&eacute;gie"; 
-			_homeBtn.setHTML(html);
+			_homeBtn = new GameButton("<i class=\"fa fa-arrow-circle-left\"></i>", "Strat&eacute;gie");
 			_homeBtn.getElement().getStyle().setMarginRight(24, Unit.PX);
 			_homeBtn.getElement().getStyle().setMarginTop(24, Unit.PX);
 			_homeBtn.addClickHandler(this); 
@@ -107,17 +104,22 @@ public class PegGameShell extends ScrollPanel {
 			super.layoutLandscape();
 			int row = 0;
 			
+			_grid.setWidget(row, 0, _homeBtn); 
+			_grid.getFlexCellFormatter().setHorizontalAlignment(row, 0, HasHorizontalAlignment.ALIGN_LEFT);
+			_grid.getFlexCellFormatter().setVerticalAlignment(row, 0, HasVerticalAlignment.ALIGN_TOP);
+			row++;
+			
 			_grid.setWidget(row, 0, _leftMargin);
 			_grid.getFlexCellFormatter().setWidth(row, 0, "45%");
 			
 			_grid.setWidget(row, 1, _score); 
 			_grid.getFlexCellFormatter().setHorizontalAlignment(row, 1, HasHorizontalAlignment.ALIGN_CENTER);
 			_grid.getFlexCellFormatter().setColSpan(row, 0, 1);
-			
+						
 			_grid.setWidget(row, 2, _rightMargin);
 			_grid.getFlexCellFormatter().setWidth(row, 2, "45%");
 			row++; 
-			
+
 			_grid.setWidget(row, 0, _startBtn); 
 			_grid.getFlexCellFormatter().setHorizontalAlignment(row, 0, HasHorizontalAlignment.ALIGN_RIGHT);
 			_grid.getFlexCellFormatter().setVerticalAlignment(row, 0, HasVerticalAlignment.ALIGN_BOTTOM);
@@ -129,11 +131,7 @@ public class PegGameShell extends ScrollPanel {
 			_grid.getFlexCellFormatter().setHorizontalAlignment(row, 2, HasHorizontalAlignment.ALIGN_LEFT);
 			_grid.getFlexCellFormatter().setVerticalAlignment(row, 2, HasVerticalAlignment.ALIGN_BOTTOM);
 			row++;
-			
-			_grid.setWidget(row, 0, _homeBtn); 
-			_grid.getFlexCellFormatter().setHorizontalAlignment(row, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			_grid.getFlexCellFormatter().setVerticalAlignment(row, 0, HasVerticalAlignment.ALIGN_TOP);
-			
+						
 			_grid.setWidget(row, 1, _instructionPanel); 
 			_grid.getFlexCellFormatter().setHorizontalAlignment(row, 1, HasHorizontalAlignment.ALIGN_CENTER);
 			_grid.getFlexCellFormatter().setColSpan(row, 0, 1);	
@@ -141,7 +139,12 @@ public class PegGameShell extends ScrollPanel {
 
 		protected void layoutPortrait() {
 			super.layoutPortrait();
-			int row = 0;	
+			int row = 0;
+			
+			_grid.setWidget(row, 1, _homeBtn); 
+			_grid.getFlexCellFormatter().setHorizontalAlignment(row, 1, HasHorizontalAlignment.ALIGN_LEFT);
+			_grid.getFlexCellFormatter().setVerticalAlignment(row, 1, HasVerticalAlignment.ALIGN_BOTTOM);
+			row++;
 			
 			_grid.setWidget(row, 0, _leftMargin);
 			_grid.getFlexCellFormatter().setWidth(row, 0, "45%");
@@ -149,7 +152,7 @@ public class PegGameShell extends ScrollPanel {
 			_grid.setWidget(row, 1, _score); 
 			_grid.getFlexCellFormatter().setHorizontalAlignment(row, 1, HasHorizontalAlignment.ALIGN_CENTER);
 			_grid.getFlexCellFormatter().setColSpan(row, 1, 2);
-			
+						
 			_grid.setWidget(row, 2, _rightMargin);
 			_grid.getFlexCellFormatter().setWidth(row, 2, "45%");
 			row++; 
@@ -168,11 +171,6 @@ public class PegGameShell extends ScrollPanel {
 			_grid.getFlexCellFormatter().setVerticalAlignment(row, 2, HasVerticalAlignment.ALIGN_BOTTOM);
 			row++;
 			
-			_grid.setWidget(row, 1, _homeBtn); 
-			_grid.getFlexCellFormatter().setHorizontalAlignment(row, 1, HasHorizontalAlignment.ALIGN_RIGHT);
-			_grid.getFlexCellFormatter().setVerticalAlignment(row, 1, HasVerticalAlignment.ALIGN_BOTTOM);
-			row++;
-
 			_grid.setWidget(row, 1, _instructionPanel); 
 			_grid.getFlexCellFormatter().setHorizontalAlignment(row, 1, HasHorizontalAlignment.ALIGN_CENTER);
 			_grid.getFlexCellFormatter().setVerticalAlignment(row, 1, HasVerticalAlignment.ALIGN_TOP);

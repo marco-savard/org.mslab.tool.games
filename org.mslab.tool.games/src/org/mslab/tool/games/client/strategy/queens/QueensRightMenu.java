@@ -1,7 +1,8 @@
 package org.mslab.tool.games.client.strategy.queens;
 
 import org.mslab.tool.games.client.core.ui.panels.GridPanel;
-import org.mslab.tool.games.client.strategy.GameButton;
+import org.mslab.tool.games.client.game.ui.GameButton;
+import org.mslab.tool.games.client.strategy.GameButtonOld;
 import org.mslab.tool.games.shared.text.MessageFormat;
 
 import com.google.gwt.dom.client.Style.Unit;
@@ -21,7 +22,7 @@ public class QueensRightMenu extends GridPanel implements ClickHandler, ChangeHa
     	_owner = owner;
     	int row = 0;
     	
-    	_nextBtn = new GameButton(); 
+    	_nextBtn = new GameButton("", "Suivant"); 
 		_grid.setWidget(row, 0, _nextBtn);
 		_nextBtn.addClickHandler(this); 
 		_nextBtn.getElement().getStyle().setMarginBottom(12, Unit.PX);

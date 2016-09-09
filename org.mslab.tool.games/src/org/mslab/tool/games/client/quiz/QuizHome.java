@@ -70,7 +70,6 @@ public class QuizHome extends GridPanel implements ResizeHandler {
 		row++; 
 		
 		_iconTray.refresh();
-		//_iconTray.getElement().getStyle().setBackgroundColor("yellow");
 		_grid.setWidget(row, 0, _iconTray);
 		_grid.getFlexCellFormatter().setVerticalAlignment(row, 0, HasVerticalAlignment.ALIGN_TOP); 
 		_grid.getFlexCellFormatter().setHorizontalAlignment(row, 0, HasHorizontalAlignment.ALIGN_CENTER);

@@ -19,7 +19,7 @@ import com.google.gwt.user.client.ui.Button;
 public class QuizButton extends Button implements MouseOverHandler, MouseOutHandler {
 	Color _bgColor = new Color(255, 255, 240);
 	
-	public QuizButton(String label) {
+	private QuizButton(String label) {
 		super(label);
 		removeStyleName("gwt-Button");
 		
