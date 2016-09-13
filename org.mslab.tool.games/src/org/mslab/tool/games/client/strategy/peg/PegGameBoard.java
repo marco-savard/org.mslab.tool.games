@@ -40,8 +40,9 @@ public class PegGameBoard extends AbsolutePanel {
 	}
 	
 	private void setGradientBackgroud(Color primaryColor) {
-		Color topColor = Color.createFromHsl(primaryColor.getHue(), primaryColor.getSaturation(), 100); //primaryColor.blendWith(Color.WHITE); 
-		Color bottomColor = Color.createFromHsl(primaryColor.getHue(), primaryColor.getSaturation(), 60); //.darker(1.5);
+		Color brighterColor = primaryColor.brighter(3.0); 
+		Color topColor = brighterColor.blendWith(Color.WHITE, 70); 
+		Color bottomColor = brighterColor;
 		String gradient = MessageFormat.format("{0}deg, {1}, {2}", new Object[] {
 				90, bottomColor.toString(), topColor.toString()});
 		StyleUtil.setLinearGradient(this, gradient);

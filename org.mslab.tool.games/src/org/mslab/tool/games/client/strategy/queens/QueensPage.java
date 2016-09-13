@@ -1,11 +1,15 @@
 package org.mslab.tool.games.client.strategy.queens;
 
+import org.mslab.tool.games.client.core.ui.panels.GridPanel;
 import org.mslab.tool.games.client.core.ui.panels.ResizeGridPanel;
 import org.mslab.tool.games.client.core.ui.theme.AbstractTheme;
+import org.mslab.tool.games.client.game.ui.GameButton;
 import org.mslab.tool.games.client.strategy.GameShell;
 import org.mslab.tool.games.shared.text.MessageFormat;
 
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
@@ -13,6 +17,7 @@ import com.google.gwt.user.client.ui.SimplePanel;
 
 public class QueensPage extends ResizeGridPanel {
 	private GameShell _owner; 
+	private NavigationPanel _navigationPanel;
 	private SimplePanel _left, _right;
 	private HTML _title;
 	private QueensLeftMenu _leftMenu;
@@ -22,8 +27,10 @@ public class QueensPage extends ResizeGridPanel {
 	
 	public QueensPage(GameShell owner) {
 		_owner = owner;
-		AbstractTheme.setTheme(new QueensTheme());
+		//AbstractTheme.setTheme(new QueensTheme());
 
+		_navigationPanel = new NavigationPanel(); 
+		
 		_left = new SimplePanel(); 
 		_title = new HTML();
 		_title.getElement().getStyle().setFontSize(250, Unit.PCT);
@@ -78,6 +85,11 @@ public class QueensPage extends ResizeGridPanel {
 		super.layoutLandscape();
 		int row = 0; 
 		
+		_grid.setWidget(row, 0, _navigationPanel);
+		_grid.getFlexCellFormatter().setColSpan(row, 0, 3);
+		_grid.getFlexCellFormatter().setHorizontalAlignment(row, 0, HasHorizontalAlignment.ALIGN_LEFT);;
+		row++; 
+		
 		_grid.setWidget(row, 0, _left);
 		_grid.getFlexCellFormatter().setWidth(row, 0, "45%");
 		
@@ -91,14 +103,14 @@ public class QueensPage extends ResizeGridPanel {
 		
 		_grid.setWidget(row, 0, _leftMenu);
 		_grid.getFlexCellFormatter().setVerticalAlignment(row, 0, HasVerticalAlignment.ALIGN_BOTTOM);
-		_grid.getFlexCellFormatter().setHorizontalAlignment(row, 0, HasHorizontalAlignment.ALIGN_RIGHT);;
+		_grid.getFlexCellFormatter().setHorizontalAlignment(row, 0, HasHorizontalAlignment.ALIGN_RIGHT);
 
 		_grid.setWidget(row, 1, _mainPanel);
 		_grid.getFlexCellFormatter().setColSpan(row, 1, 1);
 		
 		_grid.setWidget(row, 2, _rightMenu);
 		_grid.getFlexCellFormatter().setVerticalAlignment(row, 2, HasVerticalAlignment.ALIGN_BOTTOM);
-		_grid.getFlexCellFormatter().setHorizontalAlignment(row, 2, HasHorizontalAlignment.ALIGN_LEFT);;
+		_grid.getFlexCellFormatter().setHorizontalAlignment(row, 2, HasHorizontalAlignment.ALIGN_LEFT);
 		row++; 
 	}
 
@@ -106,6 +118,11 @@ public class QueensPage extends ResizeGridPanel {
 	protected void layoutPortrait() {
 		super.layoutPortrait();
 		int row = 0; 
+		
+		_grid.setWidget(row, 0, _navigationPanel);
+		_grid.getFlexCellFormatter().setColSpan(row, 0, 3);
+		_grid.getFlexCellFormatter().setHorizontalAlignment(row, 0, HasHorizontalAlignment.ALIGN_LEFT);
+		row++; 
 		
 		_grid.setWidget(row, 0, _left);
 		_grid.getFlexCellFormatter().setWidth(row, 0, "45%");
@@ -130,12 +147,34 @@ public class QueensPage extends ResizeGridPanel {
 		_grid.getFlexCellFormatter().setVerticalAlignment(row, 2, HasVerticalAlignment.ALIGN_BOTTOM);
 		_grid.getFlexCellFormatter().setHorizontalAlignment(row, 2, HasHorizontalAlignment.ALIGN_LEFT);;
 		row++; 
-		
 	}
+	
+	private class NavigationPanel extends GridPanel implements ClickHandler {
+		private GameButton _homeBtn, _strategyBtn; 
+		
+		NavigationPanel() {
+			_homeBtn = new GameButton("<i class=\"fa fa-home\"></i>", "Accueil");
+			_homeBtn.addClickHandler(this); 
+			_grid.setWidget(0, 0, _homeBtn);
+			
+			_strategyBtn = new GameButton("<i class=\"fa fa-arrow-circle-left\"></i>", "Strat&eacute;gie");
+			_strategyBtn.getElement().getStyle().setMarginLeft(12, Unit.PX);
+			_strategyBtn.addClickHandler(this); 
+			_grid.setWidget(0, 1, _strategyBtn);
+			_grid.getFlexCellFormatter().setHorizontalAlignment(0, 1, HasHorizontalAlignment.ALIGN_LEFT);
+			_grid.getFlexCellFormatter().setWidth(0, 1, "99%");
+		}
 
-
-
-
-
+		@Override
+		public void onClick(ClickEvent event) {
+			Object src = event.getSource(); 
+			
+			if (src.equals(_homeBtn)) {
+				_owner.showHome();
+			} else if (src.equals(_strategyBtn)) {
+				_owner.showStrategy();
+			}
+		}
+	}
 
 }

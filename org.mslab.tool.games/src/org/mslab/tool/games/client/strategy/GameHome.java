@@ -1,8 +1,11 @@
 package org.mslab.tool.games.client.strategy;
 
+import org.mslab.tool.games.client.ApplicationContext;
 import org.mslab.tool.games.client.core.ui.StyleUtil;
 import org.mslab.tool.games.client.core.ui.panels.GridPanel;
 import org.mslab.tool.games.client.core.ui.theme.AbstractTheme;
+import org.mslab.tool.games.client.core.ui.theme.ThemeChangeEvent;
+import org.mslab.tool.games.client.core.ui.theme.ThemeChangeHandler;
 import org.mslab.tool.games.client.game.ui.GameButton;
 import org.mslab.tool.games.client.strategy.peg.PegGameTheme;
 import org.mslab.tool.games.client.strategy.queens.QueensTheme;
@@ -92,7 +95,7 @@ public class GameHome extends GridPanel implements ClickHandler {
 	
 	class Title extends GridPanel {
 		Title() {
-			HTML icon = new HTML("<i class=\"fa fa-home\"></i>");
+			HTML icon = new HTML("");
 			icon.getElement().getStyle().setFontSize(300, Unit.PCT);
 			_grid.setWidget(0, 0, icon);
 			
@@ -129,19 +132,13 @@ public class GameHome extends GridPanel implements ClickHandler {
 		}
 	}
 	
-	class GameTile extends GridPanel implements MouseOverHandler, MouseOutHandler {
+	class GameTile extends GridPanel implements MouseOverHandler, MouseOutHandler, ThemeChangeHandler {
 		GameTile(Widget icon, String titleText) {
 			_grid.setSize("100%", "100%");
-			Color color = QueensTheme.BG_COLOR;
-			Color brighter = color.blendWith(Color.WHITE, 50);
-			Color border = color.darker();
-			String gradient = MessageFormat.format("{0}deg, {1}, {2}", new Object[] {
-				90, color.toString(), brighter.toString()});
+			//Color color = QueensTheme.BG_COLOR;
 			setSize("110px", "150px");
 			
 			StyleUtil.setBorderRadius(this, "10px");
-			StyleUtil.setLinearGradient(this, gradient);
-			getElement().getStyle().setBorderColor(border.toString());
 			getElement().getStyle().setBorderWidth(2, Unit.PX);
 			getElement().getStyle().setBorderStyle(BorderStyle.SOLID);
 			String shadow = MessageFormat.format("10px 10px 5px {0}", PegGameTheme.FG_COLOR.toString());
@@ -162,6 +159,8 @@ public class GameHome extends GridPanel implements ClickHandler {
 			
 			addMouseOverHandler(this);
 			addMouseOutHandler(this);
+			AbstractTheme.getTheme().addThemeChangeHandler(this);
+			refresh();
 		}
 
 		@Override
@@ -172,6 +171,22 @@ public class GameHome extends GridPanel implements ClickHandler {
 		@Override
 		public void onMouseOut(MouseOutEvent event) {
 			getElement().getStyle().setCursor(Cursor.DEFAULT);
+		}
+
+		@Override
+		public void onThemeChange(ThemeChangeEvent event) {
+			refresh();
+		}
+		
+		private void refresh() {
+			Color primaryColor = AbstractTheme.getTheme().getPrimaryColor(); 
+			Color top = primaryColor.blendWith(Color.WHITE, 90);
+			Color bottom = primaryColor.blendWith(Color.WHITE, 70);
+			Color border = primaryColor.darker();
+			String gradient = MessageFormat.format("{0}deg, {1}, {2}", new Object[] {
+				270, top.toString(), bottom.toString()});
+			StyleUtil.setLinearGradient(this, gradient);
+			getElement().getStyle().setBorderColor(border.toString());
 		}
 
 

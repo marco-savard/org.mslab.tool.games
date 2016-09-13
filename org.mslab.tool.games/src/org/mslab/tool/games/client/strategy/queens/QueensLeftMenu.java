@@ -13,7 +13,7 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment;
 
 public class QueensLeftMenu extends GridPanel implements ClickHandler {
 	private QueensPage _owner; 
-	private GameButton _resetBtn, _previousBtn, _homeBtn; 
+	private GameButton _resetBtn, _previousBtn; 
 	
 	QueensLeftMenu(QueensPage owner) {
 		_owner = owner;
@@ -30,11 +30,7 @@ public class QueensLeftMenu extends GridPanel implements ClickHandler {
 		_previousBtn.addClickHandler(this); 
 		row++;
 		
-		_homeBtn = new GameButton("<i class=\"fa fa-home\"></i>", "Strat&eacute;gie"); 
-		_grid.setWidget(row, 0, _homeBtn);
-		_homeBtn.addClickHandler(this); 
-		
-		_homeBtn.getElement().getStyle().setMarginBottom(60, Unit.PX);
+		_previousBtn.getElement().getStyle().setMarginBottom(60, Unit.PX);
 	}
 
 	@Override
@@ -45,13 +41,7 @@ public class QueensLeftMenu extends GridPanel implements ClickHandler {
 			_owner.reset(); 
 		} else if (src.equals(_previousBtn)) {
 			_owner.changeLevel(-1);
-		} else if (src.equals(_homeBtn)) {
-			goHome();
 		}
-	}
-
-	private void goHome() {
-		_owner.goHome();
 	}
 
 	public void setNbQueensTotal(int nbQueensTotal) {

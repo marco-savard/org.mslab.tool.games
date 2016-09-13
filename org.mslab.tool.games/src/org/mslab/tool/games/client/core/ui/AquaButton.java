@@ -1,155 +1,173 @@
 package org.mslab.tool.games.client.core.ui;
 
-import org.mslab.tool.games.client.core.ui.theme.ThemeChangeHandler;
 import org.mslab.tool.games.shared.text.MessageFormat;
 import org.mslab.tool.games.shared.types.Color;
 
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.dom.client.Style.BorderStyle;
 import com.google.gwt.dom.client.Style.Cursor;
-import com.google.gwt.dom.client.Style.Position;
-import com.google.gwt.dom.client.Style.TextAlign;
-import com.google.gwt.dom.client.Style.TextOverflow;
+import com.google.gwt.dom.client.Style.FontWeight;
 import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.dom.client.Style.VerticalAlign;
 import com.google.gwt.dom.client.Style.WhiteSpace;
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.event.dom.client.MouseOverEvent;
 import com.google.gwt.event.dom.client.MouseOverHandler;
+import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FocusPanel;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 
 //based on http://www.girliemac.com/blog/2009/04/30/css3-gradients-no-image-aqua-button/
 public class AquaButton extends FocusPanel implements MouseOverHandler, MouseOutHandler {
-	public static final int PX_PER_CHARACTRER = 12;
-	private static final int BORDER_RADIUS = 8;
-	private GlarePanel _glareBG; 
-	private Color _color, _lighterColor; 
+	private static final int GLARE_MARGIN_TOP = 2; 
+	private static final int GLARE_MARGIN_SIDE = 6; 
+	private AbsolutePanel _absolutePanel; 
+	private Button _btn; 
+	private SimplePanel _glarePanel;
+	private Color _primaryColor; 
 	
-	private AquaButton(String html, int widthPx) {					
-		removeStyleName("gwt-Button");
-		Style style = getElement().getStyle(); 
+	public AquaButton() {
+		_absolutePanel = new AbsolutePanel(); 
+		_absolutePanel.getElement().getStyle().setPaddingBottom(12, Unit.PX);
+		_absolutePanel.getElement().getStyle().setPaddingRight(12, Unit.PX);
+		this.add(_absolutePanel);
 		
-		style.setWidth(widthPx, Unit.PX);
-		style.setHeight(36, Unit.PX);
-		StyleUtil.setBorderRadius(this, (BORDER_RADIUS * 2) + "px");
-		style.setProperty("position", "relative");
+		_btn = new Button(); 
+		_btn.removeStyleName("gwt-Button");
+		Style style = _btn.getElement().getStyle(); 
+		style.setPadding(6, Unit.PX);
+		style.setPaddingLeft(12, Unit.PX);
+		style.setPaddingRight(12, Unit.PX);
+		style.setWhiteSpace(WhiteSpace.NOWRAP);
+		StyleUtil.setBorderRadius(_btn, "12px");
+		_absolutePanel.add(_btn);
 		
-		style.setMarginBottom(18, Unit.PX);		
-		style.setBorderStyle(BorderStyle.SOLID);
-		style.setBorderWidth(1, Unit.PX);
-		style.setColor(Color.WHITE.toString());
-		
-		_glareBG = new GlarePanel(html, widthPx);
-		setWidget(_glareBG);
+		_glarePanel = new GlarePanel(); 
+		_absolutePanel.add(_glarePanel, 0, 0);
 		
 		addMouseOverHandler(this);
 		addMouseOutHandler(this);
+		refresh();
 	}
 	
 	public void setHTML(String html) {
-		_glareBG.setHTML(html); 	
+		_btn.setHTML(html);
+	}
+	
+	public void setEnabled(boolean enabled) {
+		_btn.setEnabled(enabled);
+		refresh(); 
 	}
 
-	public void setColor(Color color) {
-		_color = color;
-		_lighterColor = color.brighter(2.0);
-		
-		//set BG (fallback if gradient not supported)
-		Style style = getElement().getStyle(); 
-		style.setBackgroundColor(color.toString());
-		
-		//set gradient BG
-		String topColor = color.toRGBAString();
- 		String bottomColor = _lighterColor.toRGBAString(); 
- 		
- 		String patt = "top, {0}, {1}";
-		String gradient = MessageFormat.format(patt, new Object[] {topColor, bottomColor});
- 		StyleUtil.setLinearGradient(this, gradient);
-		
-		//set shadow
-		patt = "{0} 0px 10px 16px";
-		Color shadowColor = color.brighter(3.0);
-		shadowColor.setAlpha(0.5);
-		String shadow = MessageFormat.format(patt, new Object[] {shadowColor.toRGBAString()} );
-		style.setProperty("boxShadow", shadow);
-		
-		//set border
-		patt = "{0} {1} {2} {3}";
-		String border = MessageFormat.format(patt, new Object[] {
-				_lighterColor.toString(), 
-				_lighterColor.toString(), 
-				_color.toString(), 
-				_color.toString(), //"#8ba2c1 #5890bf #4f93ca #768fa5"
-		});
-		style.setBorderColor(border);
-	}
-
-	private class GlarePanel extends SimplePanel {
-		private HTML _label; 
-		
-		GlarePanel(String html, int widthPx) {
-			Style style = getElement().getStyle(); 
-			String value = "top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0)"; 
-			StyleUtil.setLinearGradient(this, value);
-
-			style.setHeight(1, Unit.PX);
-			style.setPadding(8, Unit.PX);
-			style.setMarginTop(2, Unit.PX);
-			StyleUtil.setBorderRadius(this, BORDER_RADIUS + "px");
-			style.setPosition(Position.ABSOLUTE);
+	@Override
+	public void onMouseOver(MouseOverEvent event) {
+		if (_btn.isEnabled()) {
+			getElement().getStyle().setCursor(Cursor.POINTER);
+			int width = _btn.getOffsetWidth() - (GLARE_MARGIN_SIDE * 2);
+			int height = _btn.getOffsetWidth() - (GLARE_MARGIN_TOP * 2);
+			_glarePanel.setWidth(width + "px");
+			_glarePanel.setHeight("50%");
 			
-			style.setWidth(widthPx - BORDER_RADIUS*2 - 20, Unit.PX);
-			style.setMarginLeft(10, Unit.PX);
-			style.setMarginRight(10, Unit.PX);
-			
-			_label = new HTML(html); 
-			style = _label.getElement().getStyle(); 
-			style.setProperty("fontFamily", "Lucida Sans, Helvetica, sans-serif");
-			style.setProperty("fontWeight", "800");
-			style.setProperty("textShadow", "rgba(10, 10, 10, 0.5) 1px 2px 2px");
-			style.setTextAlign(TextAlign.CENTER);
-			style.setWhiteSpace(WhiteSpace.NOWRAP);
-			style.setTextOverflow(TextOverflow.ELLIPSIS);
-			style.setVerticalAlign(VerticalAlign.TOP);
-			setWidget(_label);
-		}
-
-		public void setHTML(String html) {
-			_label.setHTML(html);
+			//set gradient BG
+			if (_primaryColor != null) {
+				String topColor = _primaryColor.toString();
+				Color brighterColor = _primaryColor.brighter(3.0); 
+		 		String bottomColor = brighterColor.toString(); 
+		 		String patt = "top, {0}, {1}";
+				String gradient = MessageFormat.format(patt, new Object[] {topColor, bottomColor});
+		 		StyleUtil.setLinearGradient(_btn, gradient);
+		 		
+		 		setBoxShadow(brighterColor, true);
+			}
 		}
 	}
 	
 	@Override
-	public void onMouseOver(MouseOverEvent event) {
-		Style style = getElement().getStyle();
-		style.setCursor(Cursor.POINTER);
-		style.setColor(Color.YELLOW.toString());	
-		//style.setProperty("boxShadow", "rgba(255, 165, 0, 0.5) 0px 10px 16px");
-		
-		if (_color != null) {
-			Color darker = _color.darker(1.5); 
-			style.setBorderColor(darker.toString());
-		}
-		
+	public void onMouseOut(MouseOutEvent event) {
+		refresh();
 	}
 
-	@Override
-	public void onMouseOut(MouseOutEvent event) {
-		Style style = getElement().getStyle();
-		style.setCursor(Cursor.DEFAULT);
-		style.setColor(Color.WHITE.toString());
-		style.setBorderColor("#8ba2c1 #5890bf #4f93ca #768fa5");
+	private void refresh() {
+		getElement().getStyle().setCursor(Cursor.DEFAULT);
+		_glarePanel.setWidth("0px");
 		
-		if (_color != null) {
-			String patt = "{0} {1} {2} {3}";
+		//set gradient BG
+		if (_primaryColor != null) {
+			//set gradient
+			Color color = _btn.isEnabled() ? _primaryColor : _primaryColor.getGrayscale();
+			String topColor = color.brighter(2.0).toString();
+	 		String bottomColor = color.toString(); 
+	 		String patt = "top, {0}, {1}";
+			String gradient = MessageFormat.format(patt, new Object[] {topColor, bottomColor});
+	 		StyleUtil.setLinearGradient(_btn, gradient);
+	 		
+			//set border
+			patt = "{0} {1} {2} {3}";
+			Color brighterColor = color.brighter(3.0); 
 			String border = MessageFormat.format(patt, new Object[] {
-					_lighterColor.toString(), _lighterColor.toString(), _color.toString(), _color.toString(),
+					brighterColor.toString(), 
+					brighterColor.toString(), 
+					color.toString(), 
+					color.toString(), //"#8ba2c1 #5890bf #4f93ca #768fa5"
 			});
-			style.setBorderColor(border);
+			_btn.getElement().getStyle().setBorderColor(border);
+			
+			//set box shadow
+			setBoxShadow(brighterColor, false);
 		}
 	}
-} //end AquaButton
+
+	//set box shadow
+	private void setBoxShadow(Color brighterColor, boolean focused) {
+		String patt = "{0} 0px 10px 10px 0px";
+		int percentBlend = focused ? 40 : 70;
+		Color shadowColor = brighterColor.blendWith(Color.WHITE, percentBlend);
+		shadowColor.setAlpha(0.9);
+		String shadow = MessageFormat.format("6px 6px 6px {0}", shadowColor.toString());
+		StyleUtil.setBoxShadow(_btn, shadow);
+	}
+
+	public void setPrimaryColor(Color color) {
+		//set color
+		_primaryColor = color;
+		Color brighterColor = color.brighter(3.0); 
+		
+		//set BG (fallback if gradient not supported)
+		Style style = _btn.getElement().getStyle(); 
+		style.setBackgroundColor(color.toString());
+		 		
+ 		//set FG
+		int brightness = color.getBrightness();
+		Color fgColor = (brightness > 60) ? Color.BLACK : Color.WHITE; 
+		style.setColor(fgColor.toString());
+		
+		//set border
+		style.setBorderWidth(1, Unit.PX);
+		
+		//set text shadow
+		style.setFontWeight(FontWeight.BOLD);
+		style.setProperty("textShadow", "2px 2px 4px #000000");
+		
+		refresh();
+	}
+
+	
+	private static class GlarePanel extends SimplePanel {
+		GlarePanel() {
+			getElement().getStyle().setMargin(2, Unit.PX);
+			getElement().getStyle().setMarginLeft(6, Unit.PX);
+			getElement().getStyle().setMarginRight(6, Unit.PX);
+			
+			String value = "top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0)"; 
+			StyleUtil.setLinearGradient(this, value);
+			StyleUtil.setBorderRadius(this, "12px");
+		}
+	}
+
+
+	
+
+
+
+}
