@@ -12,7 +12,6 @@ import org.mslab.tool.games.client.quiz.animal.AnimalQuizPage;
 import org.mslab.tool.games.client.quiz.flag.FlagQuizPage;
 import org.mslab.tool.games.client.quiz.geo.GeoQuizPage;
 import org.mslab.tool.games.client.quiz.history.HistoryQuizPage;
-import org.mslab.tool.games.client.quiz.ui.QuizButton;
 import org.mslab.tool.games.shared.text.MessageFormat;
 
 import com.google.gwt.dom.client.Style.Unit;

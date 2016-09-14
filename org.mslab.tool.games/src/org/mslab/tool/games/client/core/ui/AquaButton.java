@@ -23,11 +23,12 @@ public class AquaButton extends FocusPanel implements MouseOverHandler, MouseOut
 	private static final int GLARE_MARGIN_TOP = 2; 
 	private static final int GLARE_MARGIN_SIDE = 6; 
 	private AbsolutePanel _absolutePanel; 
-	private Button _btn; 
+	protected Button _btn; 
 	private SimplePanel _glarePanel;
 	private Color _primaryColor; 
 	
-	public AquaButton() {
+	public AquaButton() {		
+		
 		_absolutePanel = new AbsolutePanel(); 
 		_absolutePanel.getElement().getStyle().setPaddingBottom(12, Unit.PX);
 		_absolutePanel.getElement().getStyle().setPaddingRight(12, Unit.PX);

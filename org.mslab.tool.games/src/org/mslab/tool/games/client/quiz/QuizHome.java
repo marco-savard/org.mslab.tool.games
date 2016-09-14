@@ -61,7 +61,7 @@ public class QuizHome extends GridPanel implements ResizeHandler {
 		int h = Window.getClientHeight(); 
 		boolean landscape = w > h;
 		
-		int fontSize = computeValue(100, landscape ? (w/3) : (w/2) , 200);
+		int fontSize = 500; //computeValue(100, landscape ? (w/3) : (w/2) , 200);
 		_title.getElement().getStyle().setFontSize(fontSize, Unit.PCT);
 		_iconTray.getElement().getStyle().setMarginTop(12, Unit.PX);
 		
@@ -119,7 +119,6 @@ public class QuizHome extends GridPanel implements ResizeHandler {
 
 			for (CategoryIcon icon : _widgets) {
 				icon.refresh();
-				//icon.getElement().getStyle().setBackgroundColor("orange");
 				
 				_grid.setWidget(row, col, icon);
 				_grid.getFlexCellFormatter().setHorizontalAlignment(row, col, HasHorizontalAlignment.ALIGN_CENTER);
@@ -163,22 +162,37 @@ public class QuizHome extends GridPanel implements ResizeHandler {
 			if (_image != null) {
 				int w = Window.getClientWidth(); 
 				int h = Window.getClientHeight(); 
+				boolean landscape = w > h;
 				
-				int size = MathUtil.compute(36, computeSize(), 128);
-				_image.setPixelSize(size, size);
-				setWidth((10 + size) + "px");
+				int imageWidth = _image.getWidth();
+				int imageHeight = _image.getHeight();
 				
-				int fontSize = MathUtil.compute(90, w/4, 120);
+				int maxWidth = landscape ? 128 : 256;
+				int maxHeight = landscape ? 128 : 256;
+				double ratio = calculateAspectRatioFit(imageWidth, imageHeight, maxWidth, maxHeight); 
+				w = (int)(imageWidth * ratio);
+				h = (int)(imageHeight * ratio);
+				_image.setPixelSize(w, h);
+				
+				//int size = MathUtil.compute(64, computeSize(), 128);
+				//_image.setPixelSize(size, size);
+				//setWidth((10 + size) + "px");
+				
+				int fontSize = 300; //MathUtil.compute(90, w/4, 120);
 				_nameLbl.getElement().getStyle().setFontSize(fontSize, Unit.PCT);
 			}
+		}
+		
+		private double calculateAspectRatioFit(double srcWidth, double srcHeight, int maxWidth, int maxHeight) {
+		    double ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
+		    return ratio;
 		}
 
 		private int computeSize() {
 			int w = Window.getClientWidth(); 
 			int h = Window.getClientHeight(); 
 			boolean landscape = w > h;
-			int size = landscape ? (int)(w/8.0) : (w/5);
-			size = (size > 128) ? 128 : size;
+			int size = landscape ? (w/5) : (w/4);
 			return size;
 		}
 

@@ -14,6 +14,8 @@ import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.event.dom.client.MouseOverEvent;
 import com.google.gwt.event.dom.client.MouseOverHandler;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
@@ -36,31 +38,54 @@ public class ApplicationHome extends GridPanel {
 		row++;
 	}
 	
-	private class ApplicationShellContent extends GridPanel {
+	private class ApplicationShellContent extends GridPanel implements ResizeHandler {
+		private QuizPageIcon _quizPageIcon;
+		private StrategyPageIcon _strategyPageIcon;
 
 		public ApplicationShellContent(ApplicationHome applicationShell) {
 			_grid.setSize("100%", "100%");
 			int row = 0;
 			
 			HTML title = new HTML("<i class=\"fa fa-home fa-2x\" aria-hidden=\"true\"></i> Accueil"); 
-			title.getElement().getStyle().setFontSize(200, Unit.PCT);
+			title.getElement().getStyle().setFontSize(500, Unit.PCT);
 			title.getElement().getStyle().setMarginBottom(50, Unit.PX);
 			_grid.setWidget(row, 0, title); 
 			_grid.getFlexCellFormatter().setColSpan(row, 0, 2);
 			_grid.getFlexCellFormatter().setHorizontalAlignment(row, 0, HasHorizontalAlignment.ALIGN_CENTER);
 			row++; 
 			
-			QuizPageIcon quizPageIcon = new QuizPageIcon(); 
-			_grid.setWidget(row, 0, quizPageIcon);
-			_grid.getFlexCellFormatter().setHorizontalAlignment(row, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+			_quizPageIcon = new QuizPageIcon(); 
+			_strategyPageIcon = new StrategyPageIcon(); 
+
+			Window.addResizeHandler(this);
+			layout();
+		}
+
+		@Override
+		public void onResize(ResizeEvent event) {
+			layout();
+		}
+
+		private void layout() {
+			int w = Window.getClientWidth();
+			int h = Window.getClientHeight();
+			boolean landscape = w > h;
 			
-			StrategyPageIcon strategyPageIcon = new StrategyPageIcon(); 
-			_grid.setWidget(row, 1, strategyPageIcon);
-			_grid.getFlexCellFormatter().setHorizontalAlignment(row, 1, HasHorizontalAlignment.ALIGN_LEFT);
+			if (landscape) {
+				_grid.setWidget(1, 0, _quizPageIcon);
+				_grid.setWidget(1, 1, _strategyPageIcon);
+				_grid.getFlexCellFormatter().setHorizontalAlignment(1, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+				_grid.getFlexCellFormatter().setHorizontalAlignment(1, 1, HasHorizontalAlignment.ALIGN_LEFT);
+			} else {
+				_grid.setWidget(1, 0, _quizPageIcon);
+				_grid.setWidget(2, 0, _strategyPageIcon);
+				_grid.getFlexCellFormatter().setHorizontalAlignment(1, 0, HasHorizontalAlignment.ALIGN_CENTER);
+				_grid.getFlexCellFormatter().setHorizontalAlignment(2, 0, HasHorizontalAlignment.ALIGN_CENTER);
+			}
 		}
 	}
 	
-	private abstract class PageIcon extends GridPanel implements LoadHandler, MouseOverHandler, MouseOutHandler {
+	private abstract class PageIcon extends GridPanel implements LoadHandler, MouseOverHandler, MouseOutHandler, ResizeHandler {
 		private Image _image;
 		
 		protected PageIcon(Image image, String titleText) {
@@ -73,11 +98,12 @@ public class ApplicationHome extends GridPanel {
 			row++;
 			
 			HTML title = new HTML(titleText); 
-			title.getElement().getStyle().setFontSize(140, Unit.PCT);
+			title.getElement().getStyle().setFontSize(300, Unit.PCT);
 			_grid.setWidget(row, 0, title); 
 			_grid.getFlexCellFormatter().setHorizontalAlignment(row, 0, HasHorizontalAlignment.ALIGN_CENTER);
 			row++; 
 			
+			Window.addResizeHandler(this);
 			_image.addMouseOverHandler(this); 
 			_image.addMouseOutHandler(this);
 			refresh();
@@ -98,6 +124,11 @@ public class ApplicationHome extends GridPanel {
 			resize();
 		}
 		
+		@Override
+		public void onResize(ResizeEvent event) {
+			resize();
+		}
+		
 		private void refresh() {
 			getElement().getStyle().setCursor(Cursor.DEFAULT);
 		}
@@ -110,11 +141,13 @@ public class ApplicationHome extends GridPanel {
 			int imageWidth = _image.getWidth();
 			int imageHeight = _image.getHeight();
 			
-			int maxWidth = landscape ? (w/2) - 360 : w - 60;
-			int maxHeight = landscape ? h - 60 : (h/2) - 360;
-			maxWidth = MathUtil.compute(150, maxWidth, 500); 
-			maxHeight= MathUtil.compute(100, maxHeight, 400); 
+			//int maxWidth = landscape ? (w/2) - 360 : w - 60;
+			//int maxHeight = landscape ? h - 60 : (h/2) - 360;
+			//maxWidth = MathUtil.compute(150, maxWidth, 360); 
+			//maxHeight= MathUtil.compute(100, maxHeight, 360); 
 			
+			int maxWidth = landscape ? 128 : 256;
+			int maxHeight = landscape ? 128 : 256;
 			double ratio = calculateAspectRatioFit(imageWidth, imageHeight, maxWidth, maxHeight); 
 			w = (int)(imageWidth * ratio);
 			h = (int)(imageHeight * ratio);
@@ -133,6 +166,8 @@ public class ApplicationHome extends GridPanel {
 		public void onClick(ClickEvent event) {
 			_owner.showQuiz();
 		}
+
+
 	}
 	
 	private class StrategyPageIcon extends PageIcon implements ClickHandler {

@@ -147,40 +147,42 @@ public class PegGameShell extends ScrollPanel {
 			super.layoutPortrait();
 			int row = 0;
 			
-			_grid.setWidget(row, 1, _navigationPanel); 
-			_grid.getFlexCellFormatter().setHorizontalAlignment(row, 1, HasHorizontalAlignment.ALIGN_LEFT);
-			_grid.getFlexCellFormatter().setVerticalAlignment(row, 1, HasVerticalAlignment.ALIGN_BOTTOM);
+			_grid.setWidget(row, 0, _navigationPanel); 
+			_grid.getFlexCellFormatter().setHorizontalAlignment(row, 0, HasHorizontalAlignment.ALIGN_LEFT);
+			//_grid.getFlexCellFormatter().setVerticalAlignment(row, 0, HasVerticalAlignment.ALIGN_BOTTOM);
+			_grid.getFlexCellFormatter().setColSpan(row, 0, 3);
+			row++;
+			
+			_grid.setWidget(row, 1, _score); 
+			_grid.getFlexCellFormatter().setHorizontalAlignment(row, 1, HasHorizontalAlignment.ALIGN_CENTER);
+			_grid.getFlexCellFormatter().setColSpan(row, 1, 1);
 			row++;
 			
 			_grid.setWidget(row, 0, _leftMargin);
 			_grid.getFlexCellFormatter().setWidth(row, 0, "45%");
 			
-			_grid.setWidget(row, 1, _score); 
-			_grid.getFlexCellFormatter().setHorizontalAlignment(row, 1, HasHorizontalAlignment.ALIGN_CENTER);
-			_grid.getFlexCellFormatter().setColSpan(row, 1, 2);
+			_grid.setWidget(row, 1, _board); 
+			_grid.getFlexCellFormatter().setHorizontalAlignment(row, 0, HasHorizontalAlignment.ALIGN_CENTER);
+			//_grid.getFlexCellFormatter().setColSpan(row, 1, 2);
 						
 			_grid.setWidget(row, 2, _rightMargin);
 			_grid.getFlexCellFormatter().setWidth(row, 2, "45%");
 			row++; 
 			
-			_grid.setWidget(row, 1, _board); 
-			_grid.getFlexCellFormatter().setHorizontalAlignment(row, 0, HasHorizontalAlignment.ALIGN_CENTER);
-			_grid.getFlexCellFormatter().setColSpan(row, 1, 2);
+			_grid.setWidget(row, 1, _highScore); 
+			_grid.getFlexCellFormatter().setHorizontalAlignment(row,1, HasHorizontalAlignment.ALIGN_LEFT);
+			_grid.getFlexCellFormatter().setVerticalAlignment(row, 1, HasVerticalAlignment.ALIGN_BOTTOM);
 			row++;
 			
 			_grid.setWidget(row, 1, _startBtn); 
 			_grid.getFlexCellFormatter().setHorizontalAlignment(row, 1, HasHorizontalAlignment.ALIGN_RIGHT);
 			_grid.getFlexCellFormatter().setVerticalAlignment(row, 1, HasVerticalAlignment.ALIGN_BOTTOM);
-			
-			_grid.setWidget(row, 2, _highScore); 
-			_grid.getFlexCellFormatter().setHorizontalAlignment(row, 2, HasHorizontalAlignment.ALIGN_LEFT);
-			_grid.getFlexCellFormatter().setVerticalAlignment(row, 2, HasVerticalAlignment.ALIGN_BOTTOM);
 			row++;
 			
 			_grid.setWidget(row, 1, _instructionPanel); 
 			_grid.getFlexCellFormatter().setHorizontalAlignment(row, 1, HasHorizontalAlignment.ALIGN_CENTER);
 			_grid.getFlexCellFormatter().setVerticalAlignment(row, 1, HasVerticalAlignment.ALIGN_TOP);
-			_grid.getFlexCellFormatter().setColSpan(row, 1, 2);
+			//_grid.getFlexCellFormatter().setColSpan(row, 1, 2);
 			_grid.getFlexCellFormatter().setHeight(row, 1, "90%");	
 		}
 		

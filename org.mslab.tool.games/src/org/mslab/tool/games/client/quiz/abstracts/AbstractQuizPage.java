@@ -7,7 +7,6 @@ import org.mslab.tool.games.client.core.ui.panels.GridPanel;
 import org.mslab.tool.games.client.game.ui.GameButton;
 import org.mslab.tool.games.client.quiz.QuizShell;
 import org.mslab.tool.games.client.quiz.bundles.ImageFactory;
-import org.mslab.tool.games.client.quiz.ui.QuizButton;
 import org.mslab.tool.games.shared.text.MessageFormat;
 import org.mslab.tool.games.shared.util.MathUtil;
 
@@ -46,7 +45,7 @@ public abstract class AbstractQuizPage extends GridPanel {
 		update();
 	}
 	
-	protected class ButtonPanel extends GridPanel implements ClickHandler {
+	protected class ButtonPanel extends GridPanel implements ClickHandler, ResizeHandler {
     	public ButtonPanel() {
     		int col = 0;
     		
@@ -58,8 +57,15 @@ public abstract class AbstractQuizPage extends GridPanel {
     		_playAgainBtn = new GameButton("<i class=\"fa fa-repeat\" aria-hidden=\"true\"></i>", "Jouer encore"); 
     		_playAgainBtn.addClickHandler(this); 
     		_grid.setWidget(0, col, _playAgainBtn);
+    		
+    		Window.addResizeHandler(this); 
     		refresh();
     	}
+    	
+		@Override
+		public void onResize(ResizeEvent event) {
+			refresh();
+		}
 
 		public void refresh() {
 			int w = Window.getClientWidth();
@@ -70,11 +76,11 @@ public abstract class AbstractQuizPage extends GridPanel {
     		getElement().getStyle().setMarginTop(margin, Unit.PX);
 			
 			int fontSize = landscade ? 
-				MathUtil.compute(90, w/4, 110) : 
+				MathUtil.compute(90, w/4, 120) : 
 				MathUtil.compute(90, h/3, 130);
-			
-			_homeButton.getElement().getStyle().setFontSize(fontSize, Unit.PCT);
-			_playAgainBtn.getElement().getStyle().setFontSize(fontSize, Unit.PCT);
+				
+			_homeButton.getButtonElement().getStyle().setFontSize(fontSize, Unit.PCT);
+			_playAgainBtn.getButtonElement().getStyle().setFontSize(fontSize, Unit.PCT);
 		}
 
 		@Override

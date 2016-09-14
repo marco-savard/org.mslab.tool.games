@@ -96,11 +96,11 @@ public class GameHome extends GridPanel implements ClickHandler {
 	class Title extends GridPanel {
 		Title() {
 			HTML icon = new HTML("");
-			icon.getElement().getStyle().setFontSize(300, Unit.PCT);
+			icon.getElement().getStyle().setFontSize(500, Unit.PCT);
 			_grid.setWidget(0, 0, icon);
 			
 			HTML text = new HTML("Strat&eacute;gie");
-			text.getElement().getStyle().setFontSize(300, Unit.PCT);
+			text.getElement().getStyle().setFontSize(500, Unit.PCT);
 			_grid.setWidget(0, 1, text);
 		}
 	}
@@ -152,7 +152,7 @@ public class GameHome extends GridPanel implements ClickHandler {
 			
 			HTML title = new HTML(titleText);
 			title.setWordWrap(false);
-			title.getElement().getStyle().setFontSize(200, Unit.PCT);
+			title.getElement().getStyle().setFontSize(300, Unit.PCT);
 			_grid.setWidget(row, 0, title);
 			_grid.getFlexCellFormatter().setHorizontalAlignment(row, 0, HasHorizontalAlignment.ALIGN_CENTER);;
 			row++;

@@ -1,7 +1,6 @@
 package org.mslab.tool.games.client.quiz.geo;
 
 import org.mslab.tool.games.client.game.ui.GameButton;
-import org.mslab.tool.games.client.quiz.ui.QuizButton;
 
 import com.google.gwt.dom.client.Style.Unit;
 

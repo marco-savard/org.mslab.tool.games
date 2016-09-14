@@ -80,8 +80,8 @@ public abstract class AbstractPictureQuizPage extends AbstractQuizPage implement
 		_grid.setCellPadding(padding);
 		_grid.setCellSpacing(spacing);
 		
-		int min = _anwsered ? 110 : 140;
-		int fontSize = MathUtil.compute(min, (w / 8), 250); 
+		int min = _anwsered ? 150 : 250;
+		int fontSize = MathUtil.compute(min, (w / 6), 280); 
 		_titleLbl.getElement().getStyle().setFontSize(fontSize, Unit.PCT);
 		
 		_grid.clear(true);
@@ -126,15 +126,15 @@ public abstract class AbstractPictureQuizPage extends AbstractQuizPage implement
 			int maxWidth, maxHeight; 
 			
 			if (! _anwsered) {
-				maxWidth = landscape ? w - 360 : w - 60;
-				maxHeight = landscape ? h - 60 : h - 360;
-				maxWidth = MathUtil.compute(150, maxWidth, 500); 
-				maxHeight= MathUtil.compute(100, maxHeight, 400); 
+				maxWidth = landscape ? w - 400 : w - 150;
+				maxHeight = landscape ? h - 150 : h - 400;
+				maxWidth = MathUtil.compute(200, maxWidth, 800); 
+				maxHeight= MathUtil.compute(150, maxHeight, 600); 
 			} else {
 				maxWidth = landscape ? w - 400 : w - 150;
 				maxHeight = landscape ? h - 150 : h - 400;
-				maxWidth = MathUtil.compute(100, maxWidth, 500); 
-				maxHeight= MathUtil.compute(50, maxHeight, 400); 
+				maxWidth = MathUtil.compute(100, maxWidth, 800); 
+				maxHeight= MathUtil.compute(50, maxHeight, 600); 
 			}
 			
 			double ratio = calculateAspectRatioFit(_imageWidth, _imageHeight, maxWidth, maxHeight); 
