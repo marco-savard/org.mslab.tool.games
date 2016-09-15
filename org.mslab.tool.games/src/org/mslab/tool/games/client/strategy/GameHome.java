@@ -136,7 +136,7 @@ public class GameHome extends GridPanel implements ClickHandler {
 		GameTile(Widget icon, String titleText) {
 			_grid.setSize("100%", "100%");
 			//Color color = QueensTheme.BG_COLOR;
-			setSize("110px", "150px");
+			setSize("150px", "200px");
 			
 			StyleUtil.setBorderRadius(this, "10px");
 			getElement().getStyle().setBorderWidth(2, Unit.PX);

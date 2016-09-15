@@ -32,9 +32,10 @@ public class GeoQuizPage extends AbstractQuizPage implements ResizeHandler {
 	
 	public GeoQuizPage(QuizShell quizShell) {
 		super(quizShell);
-		
 		_grid.setWidth("100%");
+		
 		_titleLbl = new HTML("Classer les villes selon la proximit&eacute;");
+		_titleLbl.getElement().getStyle().setMarginBottom(24, Unit.PX);
 		
 		_choicePanel = new ChoicePanel(); 
 		_answerPanel = new AnswerPanel();
@@ -67,6 +68,8 @@ public class GeoQuizPage extends AbstractQuizPage implements ResizeHandler {
 		Collections.shuffle(locations);
 		_choicePanel.update(locations); 
 		_answerPanel.clearGrid();
+		
+		_shell.setMenuEnabled(false);
 		_footerPanel.setVisible(false);
 	}
 	
@@ -119,6 +122,7 @@ public class GeoQuizPage extends AbstractQuizPage implements ResizeHandler {
 				btn.setWidth("100%");
 				btn.addClickHandler(this);
 				_grid.setWidget(row, 0, btn);
+				_grid.getFlexCellFormatter().setHorizontalAlignment(row, 0, HasHorizontalAlignment.ALIGN_CENTER);
 				row++;
 			}
 			refresh();
@@ -178,9 +182,10 @@ public class GeoQuizPage extends AbstractQuizPage implements ResizeHandler {
 			int h = Window.getClientHeight(); 
 			boolean landscape = w > h;
 				
-			int fontSize = landscape ? 
-					MathUtil.compute(110, w/4, 140) : 
-					MathUtil.compute(110, h/3, 140);
+			//int fontSize = landscape ? 
+			//		MathUtil.compute(110, w/4, 140) : 
+			//		MathUtil.compute(110, h/3, 140);
+			int fontSize = landscape ? 175 : 300;
 			
 			_locations.add(location);
 			String msg = MessageFormat.format("#{0} : {1}", (_nbAnswer+1), location.getName().toHtml());
@@ -271,9 +276,10 @@ public class GeoQuizPage extends AbstractQuizPage implements ResizeHandler {
 			int w = Window.getClientWidth(); 
 			int h = Window.getClientHeight(); 
 			boolean landscape = w > h;
-			int fontSize = landscape ? 
-					MathUtil.compute(110, w/4, 140) : 
-					MathUtil.compute(110, h/3, 140);
+			//int fontSize = landscape ? 
+			//		MathUtil.compute(110, w/4, 140) : 
+			//		MathUtil.compute(110, h/3, 140);
+			int fontSize = landscape ? 175 : 300;
 			
 			for (HTML html : _answers) {
 				html.getElement().getStyle().setFontSize(fontSize, Unit.PCT);
@@ -306,6 +312,7 @@ public class GeoQuizPage extends AbstractQuizPage implements ResizeHandler {
 		
 		public void update(boolean valid) {
 			_smileyPanel.update(valid);
+			_shell.setMenuEnabled(true);
 			setVisible(true);
 		}
 		

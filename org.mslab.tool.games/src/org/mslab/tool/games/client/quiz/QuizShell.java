@@ -26,16 +26,19 @@ import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Label;
 
-public class QuizShell extends GridPanel implements ClickHandler {
+public class QuizShell extends GridPanel {
 	private ApplicationShell _shell; 
 	private Map<AbstractQuizPage, Integer> _indexes = new HashMap<AbstractQuizPage, Integer>();
-	private QuizHome _home; 
+	private MenuPanel _menuPanel;
+	private GameButton _homeBtn, _quizBtn; 
 	private QuizShellContent _content;
-	private GameButton _homeBtn;
+	private QuizHome _home;
 	
 	public QuizShell(ApplicationShell shell) {
 		_shell = shell;
 		_grid.setSize("100%", "100%");
+		_grid.setCellPadding(0);
+		_grid.setCellSpacing(0);
 		int row = 0;
 		
 		String admin = ApplicationContext.getInstance().getParameters(ApplicationContext.ADMIN_PARAM); 
@@ -46,10 +49,8 @@ public class QuizShell extends GridPanel implements ClickHandler {
 			row++;
 		}
 		
-		_homeBtn = new GameButton("<i class=\"fa fa-home\" aria-hidden=\"true\"></i>", "Accueil");
-		_homeBtn.getElement().getStyle().setMargin(12, Unit.PX);
-		_homeBtn.addClickHandler(this); 
-		_grid.setWidget(row, 0, _homeBtn);
+		_menuPanel = new MenuPanel(); 
+		_grid.setWidget(row, 0, _menuPanel);
 		_grid.getFlexCellFormatter().setHorizontalAlignment(row, 0, HasHorizontalAlignment.ALIGN_LEFT);
 		row++;
 		
@@ -72,9 +73,41 @@ public class QuizShell extends GridPanel implements ClickHandler {
 		_content.showWidget(0);
 	}
 	
-	@Override
-	public void onClick(ClickEvent event) {
-		_shell.showHome();
+	public void setMenuEnabled(boolean enabled) {
+		_homeBtn.setEnabled(enabled);
+		_quizBtn.setEnabled(enabled);
+	}
+	
+	private class MenuPanel extends GridPanel implements ClickHandler {
+		
+		MenuPanel() {
+			int col = 0;
+			
+			_homeBtn = new GameButton("<i class=\"fa fa-home\" aria-hidden=\"true\"></i>", "Accueil");
+			_homeBtn.getElement().getStyle().setMargin(12, Unit.PX);
+			_homeBtn.addClickHandler(this); 
+			_grid.setWidget(0, col, _homeBtn);
+			_grid.getFlexCellFormatter().setHorizontalAlignment(0, col, HasHorizontalAlignment.ALIGN_LEFT);
+			col++; 
+			
+			_quizBtn = new GameButton("<i class=\"fa fa-arrow-circle-left\" aria-hidden=\"true\"></i>", "Quiz");
+			_quizBtn.getElement().getStyle().setMargin(12, Unit.PX);
+			_quizBtn.addClickHandler(this); 
+			_grid.setWidget(0, col, _quizBtn);
+			_grid.getFlexCellFormatter().setHorizontalAlignment(0, col, HasHorizontalAlignment.ALIGN_LEFT);
+			col++; 
+		}
+
+		@Override
+		public void onClick(ClickEvent event) {
+			Object src = event.getSource(); 
+			
+			if (src.equals(_homeBtn)) {
+				_shell.showHome();
+			} else if (src.equals(_quizBtn)) {
+				_content.showWidget(0);
+			}
+		}
 	}
 	
 	private class QuizShellContent extends DeckPanel {
@@ -113,6 +146,16 @@ public class QuizShell extends GridPanel implements ClickHandler {
 			_home.refresh(); 
 			showWidget(0);
 		}
+		
+		@Override
+		public void showWidget(int idx) {
+			super.showWidget(idx);
+			_quizBtn.setVisible(idx > 0);
+			
+			if (idx == 0) {
+				setMenuEnabled(true);
+			}
+		}
 	}
 	
 	private class StatusBar extends GridPanel implements ResizeHandler {
@@ -144,6 +187,8 @@ public class QuizShell extends GridPanel implements ClickHandler {
 			_statusLbl.setHTML(status);
 		}
 	}
+
+
 
 
 

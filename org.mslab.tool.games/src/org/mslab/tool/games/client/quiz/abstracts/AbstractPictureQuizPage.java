@@ -46,7 +46,7 @@ public abstract class AbstractPictureQuizPage extends AbstractQuizPage implement
 	
 	protected AbstractPictureQuizPage(QuizShell shell, String title) {
 		super(shell);
-		
+		_shell = shell;
 		_grid.setWidth("100%");
 		
 		_titleLbl = new HTML(title);
@@ -125,6 +125,10 @@ public abstract class AbstractPictureQuizPage extends AbstractQuizPage implement
 		if (_imageWidth > 0) {
 			int maxWidth, maxHeight; 
 			
+			maxWidth = w/2;
+			maxHeight = h/2;
+			
+			/*
 			if (! _anwsered) {
 				maxWidth = landscape ? w - 400 : w - 150;
 				maxHeight = landscape ? h - 150 : h - 400;
@@ -136,6 +140,7 @@ public abstract class AbstractPictureQuizPage extends AbstractQuizPage implement
 				maxWidth = MathUtil.compute(100, maxWidth, 800); 
 				maxHeight= MathUtil.compute(50, maxHeight, 600); 
 			}
+			*/
 			
 			double ratio = calculateAspectRatioFit(_imageWidth, _imageHeight, maxWidth, maxHeight); 
 			w = (int)(_imageWidth * ratio);
@@ -153,6 +158,8 @@ public abstract class AbstractPictureQuizPage extends AbstractQuizPage implement
 		_image.setUrl(url);
 		_rightChoice = choices.get(0);
 		_choicePanel.setChoices(choices);
+		
+		_shell.setMenuEnabled(false); 
 		_answerPanel.setVisible(false);
 		_buttonPanel.setVisible(false);	
 	}
@@ -267,8 +274,8 @@ public abstract class AbstractPictureQuizPage extends AbstractQuizPage implement
 			if (src instanceof ChoiceQuizButton) {
 				ChoiceQuizButton btn = (ChoiceQuizButton)src;
 				disableAll();
-				btn.setEnabled(true);
-				btn.getElement().getStyle().setFontSize(100, Unit.PCT);
+				//btn.setEnabled(true);
+				btn.getElement().getStyle().setFontSize(120, Unit.PCT);
 				verify(btn);
 			}
 			
@@ -282,6 +289,8 @@ public abstract class AbstractPictureQuizPage extends AbstractQuizPage implement
 			 nbRightAnswers += isRight ? 1 : 0;
 
 			_answerPanel.setAnswer(isRight, _rightChoice);
+			
+			_shell.setMenuEnabled(true); 
 			_answerPanel.setVisible(true);
 			_buttonPanel.setVisible(true);	
 			_anwsered = true; 

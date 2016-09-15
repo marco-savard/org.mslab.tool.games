@@ -37,6 +37,7 @@ public class HistoryQuizPage extends AbstractQuizPage implements ResizeHandler {
 		_grid.setWidth("100%");
 		
 		_titleLbl = new HTML("Classer par ordre chronologique");
+		_titleLbl.getElement().getStyle().setMarginBottom(24, Unit.PX);
 		
 		_choicePanel = new ChoicePanel();
 		_answerPanel = new AnswerPanel();
@@ -69,6 +70,8 @@ public class HistoryQuizPage extends AbstractQuizPage implements ResizeHandler {
 		Collections.shuffle(events);
 		_choicePanel.update(events); 
 		_answerPanel.clearGrid();
+		
+		_shell.setMenuEnabled(false);
 		_footerPanel.setVisible(false);
 	}
 	
@@ -140,18 +143,20 @@ public class HistoryQuizPage extends AbstractQuizPage implements ResizeHandler {
 			int w = Window.getClientWidth(); 
 			int h = Window.getClientHeight(); 
 			boolean landscape = w > h;
-			int fontSize = landscape ? 
-				MathUtil.compute(95, (w/5), 120) : 
-				MathUtil.compute(95, (w/3), 110);
+			//int fontSize = landscape ? 
+			//	MathUtil.compute(95, (w/5), 120) : 
+			//	MathUtil.compute(95, (w/3), 110);
 			int margin = landscape ? 
 				6 : 
 				MathUtil.compute(3, (h/100), 12);
+			
+			int fontSize = landscape ? 175 : 300;
 			
 			_grid.clear(true);
 			int row = 0; 
 			
 			for (HistoryButton btn : _buttons) {
-				Style style = btn.getElement().getStyle();
+				Style style = btn.getButtonElement().getStyle();
 				style.setFontSize(fontSize, Unit.PCT);
 				style.setMargin(margin, Unit.PX);
 				style.setMarginLeft(24, Unit.PX);
@@ -188,7 +193,7 @@ public class HistoryQuizPage extends AbstractQuizPage implements ResizeHandler {
 			int w = Window.getClientWidth(); 
 			int h = Window.getClientHeight(); 
 			boolean landscape = w > h;
-			int fontSize = landscape ? 130 : 140;
+			int fontSize = landscape ? 175 : 300;
 			
 			events.add(he);
 			String msg = MessageFormat.format("#{0} : {1}", (_nbAnswer+1), he.getHtml());
@@ -232,9 +237,10 @@ public class HistoryQuizPage extends AbstractQuizPage implements ResizeHandler {
 			int w = Window.getClientWidth(); 
 			int h = Window.getClientHeight(); 
 			boolean landscape = w > h;
-			int fontSize = landscape ? 
-				MathUtil.compute(110, w/5, 140) : 
-				MathUtil.compute(100, h/3, 140);
+			//int fontSize = landscape ? 
+			//	MathUtil.compute(110, w/5, 140) : 
+			//	MathUtil.compute(100, h/3, 140);
+			int fontSize = landscape ? 175 : 300;
 
 			for (HTML html : _answers) {
 				html.getElement().getStyle().setFontSize(fontSize, Unit.PCT);
@@ -269,6 +275,7 @@ public class HistoryQuizPage extends AbstractQuizPage implements ResizeHandler {
 			_smileyPanel.refresh();
 			_buttonPanel.refresh();
 			_grid.clear(true);
+			_shell.setMenuEnabled(true);
 			
 			int w = Window.getClientWidth(); 
 			int h = Window.getClientHeight(); 

@@ -17,7 +17,6 @@ public class PegGameSlot extends AbstractGameCell implements MouseOverHandler, M
 	
 	public PegGameSlot(PegGameBoard board, int col, int row) {
 		super(board, col, row); 
-		setSize(SIZE + "px", SIZE + "px");
 		
 		StyleUtil.setBorderRadius(this, "50%");
 		Style style = getElement().getStyle(); 
@@ -76,6 +75,8 @@ public class PegGameSlot extends AbstractGameCell implements MouseOverHandler, M
 			}
 		}
 	}
+
+
 
 
 }

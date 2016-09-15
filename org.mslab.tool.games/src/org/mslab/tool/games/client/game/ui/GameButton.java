@@ -29,7 +29,7 @@ public class GameButton extends AquaButton implements ThemeChangeHandler, Resize
 		refresh(); 
 	}
 
-	private void refresh() {
+	protected void refresh() {
 		AbstractTheme theme = AbstractTheme.getTheme(); 
 		Color color = theme.getPrimaryColor(); 
 		super.setPrimaryColor(color); 

@@ -10,21 +10,22 @@ import org.mslab.tool.games.shared.types.Color;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.dom.client.Style.BorderStyle;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 
-public class PegGameBoard extends AbsolutePanel {
+public class PegGameBoard extends AbsolutePanel implements ResizeHandler {
     static final int MARGIN = 5;
     
     private PegGameShell _shell; 
     private PegGameScore _score;
 	private List<PegGameCell> _cells = new ArrayList<PegGameCell>(); 
+	private List<PegGameSlot> _slots = new ArrayList<PegGameSlot>();
     
 	public PegGameBoard(PegGameShell shell, PegGameScore score) {
 		_shell = shell;
 		_score = score;
-		int boardSize = (PegGameCell.SIZE + 2 * MARGIN) * 7;
-		setWidth(boardSize + "px"); 
-		setHeight(boardSize + "px"); 
 		
 		Style style = getElement().getStyle();
 		style.setBorderColor(PegGameTheme.FG_COLOR.toString());
@@ -35,7 +36,13 @@ public class PegGameBoard extends AbsolutePanel {
 		String shadow = MessageFormat.format("10px 10px 5px {0}", PegGameTheme.FG_COLOR.toString());
 		StyleUtil.setBoxShadow(this, shadow);
 		
+		Window.addResizeHandler(this); 
 		initBoard();
+		refresh();
+	}
+	
+	@Override
+	public void onResize(ResizeEvent event) {
 		refresh();
 	}
 	
@@ -70,12 +77,15 @@ public class PegGameBoard extends AbsolutePanel {
 			
 			if (hasSlot) {
 				PegGameSlot slot = new PegGameSlot(this, col, row);
-				add(slot, slot.getX(), slot.getY());
+				add(slot);
+				//add(slot, slot.getX(), slot.getY());
+				_slots.add(slot);
 			}
 
 			if (hasCell) {
 				PegGameCell cell = new PegGameCell(this, col, row, PegGameCell.State.BLOCKED);
-				add(cell, cell.getX(), cell.getY());
+				add(cell);
+				//add(cell, cell.getX(), cell.getY());
 				_cells.add(cell);
 			}
 		}
@@ -86,8 +96,24 @@ public class PegGameBoard extends AbsolutePanel {
 	}
 	
 	private void refresh() {
-		// TODO Auto-generated method stub
+		int w = Window.getClientHeight(); 
+		int h = Window.getClientHeight(); 
+		boolean landscape = h > w; 
 		
+		int boardSize = landscape ? (int)(w * 0.3) : (int)(w * 0.6);
+		//int boardSize = (PegGameCell.SIZE + 2 * MARGIN) * 7;
+		setWidth(boardSize + "px"); 
+		setHeight(boardSize + "px"); 
+		
+		int cellSize = (boardSize / 7) - (2 * MARGIN); 
+		for (PegGameCell cell : _cells) {
+			cell.setSize(cellSize);
+			setWidgetPosition(cell, cell.getX(), cell.getY());
+		}
+		for (PegGameSlot slot : _slots) {
+			slot.setSize(cellSize);
+			setWidgetPosition(slot, slot.getX(), slot.getY());
+		}
 	}
 
 	private PegGameCell _selectedCell = null;
@@ -131,6 +157,8 @@ public class PegGameBoard extends AbsolutePanel {
 		
 		return foundCell;
 	}
+
+
 
 
 

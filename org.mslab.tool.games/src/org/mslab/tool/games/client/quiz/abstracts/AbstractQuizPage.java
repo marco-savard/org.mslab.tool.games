@@ -23,7 +23,7 @@ import com.google.gwt.user.client.ui.Image;
 
 public abstract class AbstractQuizPage extends GridPanel {
 	protected QuizShell _shell; 
-	protected GameButton _homeButton, _playAgainBtn;
+	protected GameButton _playAgainBtn;
 	protected List<Boolean> _rightAnswers = new ArrayList<Boolean>();
 	protected List<Boolean> _totalAnswers = new ArrayList<Boolean>();
 	
@@ -49,11 +49,6 @@ public abstract class AbstractQuizPage extends GridPanel {
     	public ButtonPanel() {
     		int col = 0;
     		
-    		_homeButton = new GameButton("<i class=\"fa fa-arrow-circle-left\" aria-hidden=\"true\"></i>", "Retour page principale");
-    		_homeButton.addClickHandler(this); 
-    		_grid.setWidget(0, col, _homeButton);
-    		col++;
-    		
     		_playAgainBtn = new GameButton("<i class=\"fa fa-repeat\" aria-hidden=\"true\"></i>", "Jouer encore"); 
     		_playAgainBtn.addClickHandler(this); 
     		_grid.setWidget(0, col, _playAgainBtn);
@@ -75,12 +70,13 @@ public abstract class AbstractQuizPage extends GridPanel {
 			int margin = MathUtil.compute(0, h/200, 4);
     		getElement().getStyle().setMarginTop(margin, Unit.PX);
 			
+    		/*
 			int fontSize = landscade ? 
 				MathUtil.compute(90, w/4, 120) : 
 				MathUtil.compute(90, h/3, 130);
 				
-			_homeButton.getButtonElement().getStyle().setFontSize(fontSize, Unit.PCT);
 			_playAgainBtn.getButtonElement().getStyle().setFontSize(fontSize, Unit.PCT);
+			*/
 		}
 
 		@Override
@@ -89,8 +85,6 @@ public abstract class AbstractQuizPage extends GridPanel {
 			
 			if (_playAgainBtn.equals(src)) {
 				playAgain();
-			} else if (_homeButton.equals(src)) {
-				goHome(); 
 			}
 		}
     }
@@ -116,12 +110,12 @@ public abstract class AbstractQuizPage extends GridPanel {
 			
 			if (_image != null) {
 				int len = Math.min(w, h);
-				int ps = MathUtil.compute(20, len/8, 90); 
+				int ps = MathUtil.compute(40, len/6, 90); 
 				_image.setPixelSize(ps, ps);
 			}
 			
 			if (_result != null) {
-				int fontSize = landscape ? 120 : 150;
+				int fontSize = landscape ? 180 : 240;
 				int margin = landscape ? 0 : 20;
 				
 				if (Math.max(w, h) < 500) {
@@ -136,7 +130,7 @@ public abstract class AbstractQuizPage extends GridPanel {
 		public void update(boolean valid) {
 			_grid.clear(true);
 			int row = 0; 
-			
+						
 			String msg = valid ? 
 					getGoodAnswers() : 
 					"Mauvaise r&eacute;ponse";

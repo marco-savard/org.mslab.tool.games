@@ -31,7 +31,6 @@ public class PegGameCell extends AbstractGameCell implements MouseOverHandler, M
 		super(board, col, row); 
 		_state = state;
 		_hoverColor = Color.BLUE_CADET.blendWith(Color.WHITE); 
-		setSize(SIZE + "px", SIZE + "px");
 		
 		StyleUtil.setBorderRadius(this, "50%");
 		Style style = getElement().getStyle(); 
@@ -238,6 +237,7 @@ public class PegGameCell extends AbstractGameCell implements MouseOverHandler, M
 			return _html;
 		}
 	}
+
 
 
 
